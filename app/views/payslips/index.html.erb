@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Payslips</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @payslips.each do |payslip| %>
+      <tr>
+        <td><%= link_to 'Show', payslip %></td>
+        <td><%= link_to 'Edit', edit_payslip_path(payslip) %></td>
+        <td><%= link_to 'Destroy', payslip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Payslip', new_payslip_path %>
