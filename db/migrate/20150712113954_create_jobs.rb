@@ -5,13 +5,13 @@ class CreateJobs < ActiveRecord::Migration
       t.text :notes
       t.datetime :start
       t.datetime :end
-      t.integer :seconds
+      t.integer :seconds, :default => 0
       t.text :comments
       t.integer :client_id
       t.integer :company_id
 
-      t.boolean :completed
-      t.boolean :paid
+      t.boolean :completed, :default => false
+      t.boolean :paid, :default => false
 
       t.string :photo1
       t.string :photo2

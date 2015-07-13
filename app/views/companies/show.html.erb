@@ -1,4 +1,62 @@
 <p id="notice"><%= notice %></p>
 
+ <div>
+  <h3>Info</h3>
+  <p><b>Name:</b> <%= @company.name %></p>
+  <p><b>Email:</b> <%= @company.email%></p>
+  <p><b>Address:</b> <%= @company.address %></p>
+  <p><b>Phone:</b> <%= @company.phone %></p>
+  </div>
+
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
+
+<h1>Listing Users</h1>
+
+<% if @boss %>
+    <div>
+      <h3>Boss</h3>
+      <table>
+
+
+        <tbody>
+          
+            <tr>
+              <td><%= @boss.name %></td>
+              <td><%= @boss.phone %></td>
+             
+              <td><%= link_to 'Show', @boss %></td>
+              <td><%= link_to 'Edit', edit_user_path(@boss) %></td>
+            </tr>
+          
+        </tbody>
+
+      </table>
+    </div>
+<% end  %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.phone %></td>
+       
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <%= link_to 'New User', "/users/new_worker_company/#{@company.id}" %>
+  </tbody>
+</table>

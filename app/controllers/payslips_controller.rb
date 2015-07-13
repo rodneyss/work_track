@@ -1,5 +1,6 @@
 class PayslipsController < ApplicationController
   before_action :set_payslip, only: [:show, :edit, :update, :destroy]
+  before_action :check_user
 
   # GET /payslips
   # GET /payslips.json
@@ -65,6 +66,12 @@ class PayslipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_payslip
       @payslip = Payslip.find(params[:id])
+    end
+
+    def check_user
+      if @current_user.nil?
+        redirect_to root_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

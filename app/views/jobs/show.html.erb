@@ -1,4 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+
+  <div>
+  <h3>Info</h3>
+  <p><b>Client:</b> <%= @job.client.name %></p>
+  <p><b>Address:</b> <%= @job.address %></p>
+  <p><b>Notes:</b> <%= @job.notes %></p>
+  <p><b>Start:</b> <%= @job.start %></p>
+  <p><b>Finish:</b> <%= @job.end %></p>
+  <p><b>Hours:</b> <%= @job.seconds / 1.hour %></p>
+
+  
+  </div>
+
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>

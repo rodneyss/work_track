@@ -40,17 +40,17 @@ ActiveRecord::Schema.define(version: 20150712122526) do
     t.text     "notes"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "seconds"
+    t.integer  "seconds",    default: 0
     t.text     "comments"
     t.integer  "client_id"
     t.integer  "company_id"
-    t.boolean  "completed"
-    t.boolean  "paid"
+    t.boolean  "completed",  default: false
+    t.boolean  "paid",       default: false
     t.string   "photo1"
     t.string   "photo2"
     t.string   "photo3"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "jobs_payslips", id: false, force: :cascade do |t|
@@ -59,14 +59,14 @@ ActiveRecord::Schema.define(version: 20150712122526) do
   end
 
   create_table "payslips", force: :cascade do |t|
-    t.boolean  "paid"
-    t.datetime "start"
+    t.boolean  "paid",       default: false
+    t.datetime "start",      default: '2015-07-13 05:20:27'
     t.datetime "end"
-    t.boolean  "finalized"
+    t.boolean  "finalized",  default: false
     t.integer  "user_id"
-    t.integer  "seconds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "seconds",    default: 0
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   create_table "users", force: :cascade do |t|

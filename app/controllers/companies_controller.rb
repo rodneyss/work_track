@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
 
   # GET /companies
   # GET /companies.json
@@ -10,6 +11,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @boss = User.find_by(:company => @company.id, :boss => true)
   end
 
   # GET /companies/new
@@ -67,8 +69,16 @@ class CompaniesController < ApplicationController
       @company = Company.find(params[:id])
     end
 
+    def check_admin
+      if @current_user.nil? 
+        redirect_to root_path
+      elsif (@current_user.admin == false)
+        redirect_to root_path
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params[:company]
+      params.require(:company).permit(:name, :email, :address, :phone)
     end
 end

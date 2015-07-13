@@ -4,6 +4,16 @@ Rails.application.routes.draw do
   resources :payslips
   resources :companies
   resources :users
+
+  root :to => 'pages#index'
+
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
+
+  get '/users/new_worker_company/:id' => 'users#new_worker_company'
+
+  get '/:something' => 'pages#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
