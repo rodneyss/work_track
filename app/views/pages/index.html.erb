@@ -3,7 +3,7 @@
 
 <div class="menu_select">
 <% if @current_user.admin %>
-    <ul>
+    <ul class="mainMenu">
       <li>
         <%= link_to 'Companies', companies_path %>
       </li>
@@ -13,15 +13,15 @@
       </li>
     </ul>
 <% elsif @current_user.boss %>
-<ul>
-  <li>
-    <%= link_to 'Jobs', jobs_path %>
-  </li>
+  <ul class="mainMenu">
+    <li>
+      <%= link_to 'Jobs', jobs_path %>
+    </li>
 
-  <li>
-    <%= link_to 'Workers', users_path %>
-  </li>
-</ul>
+    <li>
+      <%= link_to 'Workers', users_path %>
+    </li>
+  </ul>
 
 <% end  %>
 

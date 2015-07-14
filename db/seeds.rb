@@ -26,6 +26,8 @@ worker1 = User.create(name: 'jesse', email: 'jesse@site.com', password: "passwor
 company1.users << boss1 << worker1
 company1.clients << client1
 
+company1.jobs << job1
+
 client1.jobs << job1
 
 payslip1.jobs << job1

@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
   def authenticate
 
     if session[:user_id]
-        @current_user = User.find session[:user_id]
+        if (User.where( :id => session[:user_id] )).present?
+          @current_user = User.find session[:user_id]
+        else
+          session[:user_id] = nil
+        end
     end
   end
 

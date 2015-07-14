@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     elsif @current_user.boss
       @user = User.find(params[:id])
-      if @user.company != @current_user.company || @user.admin
+      if @user.company != @current_user.company || @user.admin #no one can see admin except admin
         @user = @current_user
       end
       
@@ -95,6 +95,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    redirect_to root_path if !@current_user.boss
     @user = User.find(params[:id])
     @user.destroy
     respond_to do |format|

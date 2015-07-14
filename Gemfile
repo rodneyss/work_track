@@ -27,6 +27,8 @@ gem 'bcrypt', '~> 3.1.7'
   gem 'factory_girl_rails'
   gem 'faker'
 
+gem 'formatted_times'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

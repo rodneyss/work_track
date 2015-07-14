@@ -1,16 +1,39 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+
   before_action :check_user
+
+  include JobsHelper
 
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    if @current_user.admin
+      @jobs = Job.all
+    elsif @current_user.boss
+      @jobs = @current_user.company.jobs
+    else
+      @jobs = @current_user.jobs
+    end
   end
 
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+   
+    if @current_user.admin
+      @job = Job.all
+    elsif @current_user.boss
+      job = @current_user.company.jobs.ids
+      if job.index params[:id].to_i
+        @job = Job.find(params[:id])
+      end
+    else
+      job = @current_user.jobs.ids
+      if job.index params[:id].to_I
+        @job = Job.find(params[:id])
+      end
+    end
+
   end
 
   # GET /jobs/new
@@ -20,6 +43,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/edit
   def edit
+    @job = Job.find(params[:id])
   end
 
   # POST /jobs
@@ -38,9 +62,35 @@ class JobsController < ApplicationController
     end
   end
 
+
+  def start_stop
+    job = Job.find(params[:id])
+  
+    if job_params[:start] == '1'
+      job.update(:start => Time.zone.now)
+
+    else
+      job.update(:end => Time.zone.now, :seconds => (job.end - job.start) )
+
+    end
+
+    if request.xhr?
+      if job_params[:start] == '1'
+        render :json => {:timeTaken => job.start.to_f * 1000}
+      else
+        clocked_hours = time_spent_hours(job.seconds)
+        render :json => {:timeTaken => job.end.to_f * 1000, :hours => clocked_hours }
+      end
+    end
+
+
+  end
+
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    @job = Job.find(params[:id])
+
     respond_to do |format|
       if @job.update(job_params)
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
@@ -55,6 +105,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    @job = Job.find(params[:id])
     @job.destroy
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
@@ -63,10 +114,7 @@ class JobsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_job
-      @job = Job.find(params[:id])
-    end
+
 
     def check_user
       if @current_user.nil?
@@ -76,6 +124,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params[:job]
+      params.require(:job).permit(:address, :id, :notes, :start, :end, :seconds, :comments, :client_id, :company_id, :completed, :paid, :photo1, :photo2, :photo3, :reference)
     end
 end

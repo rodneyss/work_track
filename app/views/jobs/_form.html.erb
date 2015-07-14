@@ -11,7 +11,34 @@
     </div>
   <% end %>
 
+    <div class="field">
+      <%= f.text_field :address, :placeholder => "address" %><br>
+    </div>
+    <div class="field">
+      <%= f.text_area :notes, :placeholder => "notes" %><br>
+    </div>
+    <div class="field">
+      <%= f.datetime_local_field :start %><br>
+    </div> 
+    <div class="field">
+      <%= f.datetime_local_field :end %><br>
+    </div>
+
+      <div class="field">
+      <%= f.label "Completed" %> <br/>
+      <%= f.check_box :completed %><br>
+      </div>
+
+      <div class="field">
+      <%= f.label "Paid" %> <br/>
+      <%= f.check_box :paid %><br>
+      </div>
+
   <div class="actions">
     <%= f.submit %>
+
+
   </div>
 <% end %>
+
+

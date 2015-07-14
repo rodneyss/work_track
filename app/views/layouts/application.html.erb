@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>WorkTrack</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -11,7 +12,6 @@
 <nav id="mortals">
   <ul>
     
-
     <%== intellinav  %>
 
   </ul>
@@ -19,7 +19,10 @@
 
 
 
+
 <%= yield %>
+
+
 
 </body>
 </html>
