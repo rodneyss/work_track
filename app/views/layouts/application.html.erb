@@ -9,20 +9,20 @@
 </head>
 <body>
 
-<nav id="mortals">
-  <ul>
-    
-    <%== intellinav  %>
+  <div id="container">
+    <nav id="mortals">
+        <ul>
+          
+          <%== intellinav  %>
 
-  </ul>
-</nav>
+        </ul>
+    </nav>
 
+    <%= yield %>
 
+  </div>
 
-
-<%= yield %>
-
-
-
+    <div id="workerPic">
+    </div>
 </body>
 </html>

@@ -15,12 +15,17 @@
 <% elsif @current_user.boss %>
   <ul class="mainMenu">
     <li>
-      <%= link_to 'Jobs', jobs_path %>
+      
+      <%= link_to '<div class="bottomMenu">Jobs</div>'.html_safe, jobs_path %>
+
     </li>
 
     <li>
-      <%= link_to 'Workers', users_path %>
+     
+       <%= link_to '<div class="bottomMenu">Workers</div>'.html_safe, users_path %>
     </li>
+   
+
   </ul>
 
 <% end  %>

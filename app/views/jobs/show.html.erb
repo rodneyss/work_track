@@ -3,8 +3,8 @@
 
   <div id="jobInfo" data-jobid=<%= @job.id %> >
 
-    <p><b>Ref#:</b> <%= @job.reference %> </p>
-    <% if @job.client.name %>
+    <p><b>Job#:</b> <%= @job.reference %> </p>
+    <% if @job.client %>
     <p><b>Client:</b> <%= @job.client.name %></p>
     <% end %>
     <p><b>Address:</b> <%= @job.address %></p>
@@ -26,18 +26,21 @@
       </thead>
 
       <tbody>
-        
             <tr>
-              <td id="startBox"><%= @job.start.strftime('%c') %></td>
-              <td id="finishBox"><%= @job.end.strftime('%c') %> </td>
+
+              <td id="startBox"><%= @job.start ? @job.start.strftime('%c') : 'click'%></td>
+              <td id="finishBox"><%= @job.end ? @job.end.strftime('%c') : 'click'%></td>
               <td id="hoursDone"><%= time_spent_hours @job.seconds %></td>
 
             </tr>
         </tbody>
       </table>
 
-      <button id="complete">Complete</button>
+      <%if !@job.completed %>
 
+      <button id="complete">Complete</button>
+      
+      <% end %>
   
   </div>
 
@@ -45,5 +48,8 @@
 
 <br>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+<div id="bottomMenu">
+<%= link_to '<div class="bottomMenu">Jobs</div>'.html_safe, jobs_path %>
+<%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_job_path(@job) %> 
+
+</div>

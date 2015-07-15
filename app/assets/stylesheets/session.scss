@@ -23,11 +23,7 @@
 
   
 
-  .mainMenu li{
-    margin-bottom: 20px;
-    border: 1px solid black;
-    padding: 30px 0;
-  }
+
 
   table{
     width: 100%;
@@ -41,6 +37,44 @@
   textarea{
   height: 6em;
   width: 100%;
+  }
+
+  table#jobListing{
+  width: 100%;
+  margin-left: 0;
+  }
+  
+  #bottomMenu{
+    max-width: 100%;
+    margin-left: 0;
+  }
+  
+  #myUserSelect{
+  margin-top: 70px;
+  width: 90%;
+  margin-left: 5%;
+  }
+
+  #doneSelect{
+  position: fixed;
+  width: 100%;
+  margin-left: 0;
+
+  }
+
+  #onSite{
+  max-width: 100%;
+  margin-left: 0;
+  }
+
+  #addWorkers{
+  width: 100%;
+  margin-left: 0;
+  }
+
+  select{
+    
+    width:100%;
   }
 
 

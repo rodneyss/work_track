@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714043752) do
+ActiveRecord::Schema.define(version: 20150715060750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150714043752) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.string   "reference"
+    t.string   "onsite"
   end
 
   create_table "jobs_payslips", id: false, force: :cascade do |t|
@@ -61,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150714043752) do
 
   create_table "payslips", force: :cascade do |t|
     t.boolean  "paid",       default: false
-    t.datetime "start",      default: '2015-07-13 05:20:27'
+    t.datetime "start",      default: '2015-07-15 08:17:46'
     t.datetime "end"
     t.boolean  "finalized",  default: false
     t.integer  "user_id"

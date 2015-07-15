@@ -2,7 +2,7 @@ class CreatePayslips < ActiveRecord::Migration
   def change
     create_table :payslips do |t|
       t.boolean :paid, :default => false
-      t.datetime :start, :default => Time.now
+      t.datetime :start, :default => Time.zone.now
       t.datetime :end
       t.boolean :finalized, :default => false
 

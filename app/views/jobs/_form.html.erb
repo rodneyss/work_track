@@ -11,28 +11,59 @@
     </div>
   <% end %>
 
+
+    <div id="addWorkers"> 
+      <h3>Workers</h3>
+    </div>
+
+
+
+    <div id="onSite" class="workersWork">
+
+        <% @job.users.each do |user| %>
+
+         <div class="bottomMenu workForce" data-workid=<%= user.id %> ><%= user.name %></div>
+
+        <% end %>
+
+    </div>
+
     <div class="field">
-      <%= f.text_field :address, :placeholder => "address" %><br>
+    <%= f.collection_select :client_id, @clients, :id, :name, include_blank: true %>
+    </div>
+  
+    <div class="field">
+      <%= f.text_field :reference, :placeholder => "job#" %><br>
+    </div>
+
+
+    <div class="field">
+      <%= f.text_area :address, :placeholder => "address" %><br>
     </div>
     <div class="field">
       <%= f.text_area :notes, :placeholder => "notes" %><br>
     </div>
-    <div class="field">
-      <%= f.datetime_local_field :start %><br>
-    </div> 
-    <div class="field">
-      <%= f.datetime_local_field :end %><br>
-    </div>
 
+    <% if @job.address %>
       <div class="field">
+        <%= f.datetime_local_field :start %><br>
+      </div> 
+      <div class="field">
+        <%= f.datetime_local_field :end %><br>
+      </div>
+    <% end %>
+
+      <div class="checkBox">
       <%= f.label "Completed" %> <br/>
       <%= f.check_box :completed %><br>
       </div>
 
-      <div class="field">
+      <div class="checkBox">
       <%= f.label "Paid" %> <br/>
       <%= f.check_box :paid %><br>
       </div>
+
+      <%= f.hidden_field :onsite, :value => @job.onsite, id: "chosenWorkers" %>
 
   <div class="actions">
     <%= f.submit %>

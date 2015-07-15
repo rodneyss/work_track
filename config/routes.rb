@@ -17,4 +17,7 @@ Rails.application.routes.draw do
 
   post '/startstop/:id' => 'jobs#start_stop'
 
+  post '/jobcomplete/:id' => 'jobs#job_complete'
+
+
 end

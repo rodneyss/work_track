@@ -2,7 +2,13 @@
 
 <h1>Listing Jobs</h1>
 
-<table>
+<a href= <%= new_job_path %>>
+  <div class="bottomMenu">
+    New Job
+  </div>
+</a>
+
+<table id="jobListing">
   <thead>
     <tr>
       <th>Address</th>
@@ -15,10 +21,13 @@
     <% @jobs.each do |job| %>
       <tr>
         <td><%= job.address %></td>
+
+     
         <td><%= job.notes %></td>
 
 
-        <td><%= link_to 'Show', job %></td>
+
+     <td><%= link_to 'Show', job %></td> 
        
         <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -28,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Job', new_job_path %>
+
