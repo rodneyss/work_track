@@ -8,11 +8,11 @@ Job.destroy_all
 
 admin = User.create(name: 'admin', email: 'admin@site.com', password: "01Mpw4wtit", boss: true, admin: true)
 
-company1 = Company.create(name: 'Wello Plumbing', address: Faker::Address.street_address)
-client1 = Client.create(name: 'Link real estate', address: Faker::Address.street_address)
-client2= Client.create(name: 'Hamilton Homes', address: Faker::Address.street_address)
+company1 = Company.create(name: 'Wello Plumbing', address: "55 Melrose Drive")
+client1 = Client.create(name: 'Link real estate', address: "3A Linken parade North Street")
+client2= Client.create(name: 'Hamilton Homes', address: "423/2 Flinders Ave St Mary's")
 
-job1 = Job.create(address: Faker::Address.street_address)
+job1 = Job.create(address: "21 union street St leonards")
 payslip1 = Payslip.create()
 
 boss1 = User.create(name: 'tom', email: 'tom@site.com', password: "01Mpw4wtit", boss: true)
