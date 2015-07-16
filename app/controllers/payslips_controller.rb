@@ -104,6 +104,6 @@ class PayslipsController < ApplicationController
  
     def payslip_params
 
-       params.require(:payslip).permit(:start, :end, :seconds, :finalized, :paid)
+       params.require(:payslip).permit(:start, :finish, :seconds, :finalized, :paid)
     end
 end

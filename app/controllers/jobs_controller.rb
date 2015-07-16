@@ -73,12 +73,12 @@ class JobsController < ApplicationController
   def start_stop
     job = Job.find(params[:id])
   
-    if job_params[:start] == '1'
+    if job_params[:start] == '1' && !job.start
       job.update(:start => Time.zone.now)
 
-    else
+    elsif job.
       time_now = Time.zone.now
-      job.update(:end => time_now, :seconds => (time_now - job.start) )
+      job.update(:finish => time_now, :seconds => (time_now - job.start) )
 
       payslip_seconds_update job
     end
@@ -88,7 +88,7 @@ class JobsController < ApplicationController
         render :json => {:timeTaken => job.start.to_f * 1000}
       else
         clocked_hours = time_spent_hours(job.seconds)
-        render :json => {:timeTaken => job.end.to_f * 1000, :hours => clocked_hours }
+        render :json => {:timeTaken => job.finish.to_f * 1000, :hours => clocked_hours }
       end
     end
   end
@@ -137,14 +137,14 @@ class JobsController < ApplicationController
 
           if @job.seconds !=0
               #update payslips connected to job with with delta change to seconds
-              if @job.seconds != @job.end - @job.start
-                dseconds = (@job.end - @job.start) - @job.seconds
+              if @job.seconds != @job.finish - @job.start
+                dseconds = (@job.finish - @job.start) - @job.seconds
                 job_modified_update_payslips(@job, dseconds)
               end
 
           end
           
-          @job.update( :seconds => @job.end - @job.start )
+          @job.update( :seconds => @job.finish - @job.start )
 
         end
 
@@ -178,6 +178,6 @@ class JobsController < ApplicationController
     end
 
     def job_params
-      params.require(:job).permit(:address, :id, :notes, :start, :end, :seconds, :comments, :client_id, :company_id, :completed, :paid, :photo1, :photo2, :photo3, :reference, :onsite)
+      params.require(:job).permit(:address, :id, :notes, :start, :finish, :seconds, :comments, :client_id, :company_id, :completed, :paid, :photo1, :photo2, :photo3, :reference, :onsite)
     end
 end
