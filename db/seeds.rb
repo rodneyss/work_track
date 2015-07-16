@@ -15,10 +15,10 @@ client2= Client.create(name: 'Hamilton Homes', address: "423/2 Flinders Ave St M
 job1 = Job.create(address: "21 union street St leonards")
 payslip1 = Payslip.create()
 
-boss1 = User.create(name: 'tom', email: 'tom@site.com', password: "01Mpw4wtit", boss: true)
-worker1 = User.create(name: 'jesse', email: 'jesse@site.com', password: "password")
-worker2 = User.create(name: 'ben', email: 'ben@site.com', password: "password")
-worker3 = User.create(name: 'mathew', email: 'mathew@site.com', password: "password")
+boss1 = User.create(name: 'Tom Lindsey', email: 'tom@site.com', password: "01Mpw4wtit", boss: true)
+worker1 = User.create(name: 'Jesse Wellington', email: 'jesse@site.com', password: "password")
+worker2 = User.create(name: 'Ben Maple', email: 'ben@site.com', password: "password")
+worker3 = User.create(name: 'Mathew Sharp', email: 'mathew@site.com', password: "password")
 
 company1.users << boss1 << worker1 << worker2 << worker3
 company1.clients << client1 << client2
