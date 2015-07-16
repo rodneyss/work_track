@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150716121426) do
     t.string   "address"
     t.text     "notes"
     t.datetime "start"
-    t.datetime "end"
+    t.datetime "finish"
     t.integer  "seconds",    default: 0
     t.text     "comments"
     t.integer  "client_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150716121426) do
 
   create_table "payslips", force: :cascade do |t|
     t.boolean  "paid",       default: false
-    t.datetime "start",      default: '2015-07-16 12:18:42'
+    t.datetime "start",      default: '2015-07-16 23:41:58'
     t.datetime "finish"
     t.boolean  "finalized",  default: false
     t.integer  "user_id"
