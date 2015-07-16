@@ -10,6 +10,32 @@
       </ul>
     </div>
   <% end %>
+  
+  
+
+
+    <div class="field">
+      <%= f.label "Seconds worked" %> <br/>
+      <%= f.number_field :seconds, :placeholder => "seconds" %><br>
+    </div>
+
+
+      <div class="field">
+        <%= f.datetime_local_field :start %><br>
+      </div> 
+      <div class="field">
+        <%= f.datetime_local_field :finish %><br>
+      </div>
+
+      <div class="checkBox">
+      <%= f.label "Finalized" %> <br/>
+      <%= f.check_box :finalized %><br>
+      </div>
+
+      <div class="checkBox">
+      <%= f.label "Paid" %> <br/>
+      <%= f.check_box :paid %><br>
+      </div>
 
   <div class="actions">
     <%= f.submit %>

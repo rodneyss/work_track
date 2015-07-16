@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :check_user
 
-  # GET /users
-  # GET /users.json
+
   def index
     if @current_user.admin == true
       @users = User.all
@@ -14,8 +13,7 @@ class UsersController < ApplicationController
       
   end
 
-  # GET /users/1
-  # GET /users/1.json
+
   def show
     
     if @current_user.admin
@@ -31,7 +29,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
+
   def new
     @user = User.new
   end
@@ -42,7 +40,7 @@ class UsersController < ApplicationController
 
   end
 
-  # GET /users/1/edit
+ 
   def edit
     
     if @current_user.admin
@@ -58,10 +56,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # POST /users
-  # POST /users.json
+
   def create
     @user = User.new(user_params)
+
 
     @current_user.company.users << @user if !@current_user.admin && @current_user.boss
 
@@ -76,8 +74,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
+
   def update
     @user = User.find(params[:id])
 
@@ -97,6 +94,7 @@ class UsersController < ApplicationController
   def destroy
     redirect_to root_path if !@current_user.boss
     @user = User.find(params[:id])
+    @user.payslips.destroy_all
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }

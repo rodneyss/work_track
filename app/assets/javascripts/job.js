@@ -55,7 +55,10 @@ $(document).ready(function(){
 
     };
 
-    var addWorkers = function() {
+    var addWorkers = function(e) {
+
+      e.preventDefault();
+
       if( !job.allWorkers ){
 
         $.ajax({
@@ -86,7 +89,7 @@ $(document).ready(function(){
 
     var displayWorkerPic = function(data){
         $('#workerPic').html('');
-        $('#workerPic').html('<div id="doneSelect">Done</div> <div id="myUserSelect"></div>');
+        $('#workerPic').html('<div id="doneSelect" class="comButton">Done</div> <div id="myUserSelect"></div>');
 
         $('#container').hide();
         
@@ -99,7 +102,7 @@ $(document).ready(function(){
 
               }
 
-              $('#myUserSelect').append('<div class="bottomMenu workForce' +onJob+  ' data-workid='+ data[i].id + '>' + data[i].name +'</div>')
+              $('#myUserSelect').append('<div class="workForce onsiteButton' +onJob+  ' data-workid='+ data[i].id + '>' + data[i].name +'</div>')
         }
 
     }
@@ -151,7 +154,7 @@ $(document).ready(function(){
       var onJobSite = ""
 
       for( var i = 0 ; i < job.workers.length ; i++){
-       $('#onSite').append('<div class="bottomMenu workForce" data-workid='+ job.workers[i].id + '>' + job.workers[i].name +'</div>');
+       $('#onSite').append('<div class="onsiteButton workForce" data-workid='+ job.workers[i].id + '>' + job.workers[i].name +'</div>');
 
        onJobSite += " "+ job.workers[i].id
       }
@@ -177,21 +180,36 @@ $(document).ready(function(){
             method: 'POST',
             data: jobData
 
-        }).done(function(data) {
+        }).done(function() {
+          
+          window.location="/jobs";
+            
+        });
+      }
+    };
 
-          console.log(data)
+
+    var finalizePay = function() {
+
+            $.ajax({
+            url: '/finalize',
+            method: 'GET',
+            dataType: "json"
+           
+
+        }).done(function() {
+          $('table tbody td:nth-child(3)').html('true')
             
         });
 
-
-      }
-    };
+    }
 
    
 
     if( $('#addWorkers') ){  upDateWorkers()  };
 
 
+    $('#finalize').on('click', finalizePay);
     $('#complete').on('click', workCompleted);
 
     $('#finishBox').on('click', finishWork);

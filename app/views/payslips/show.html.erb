@@ -1,4 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_payslip_path(@payslip) %> |
-<%= link_to 'Back', payslips_path %>
+
+  <div>
+  <h3>Info</h3>
+  <p><b>Name:</b> <%= @payslip.user.name %></p>
+  <p><b>Pay start:</b> <%= @payslip.start.strftime('%c')%></p>
+  <p><b>Pay end:</b> <%= @payslip.finish ? @payslip.finish.strftime('%c') : "not finalised" %></p>
+  <p><b>Hours:</b> <%= time_spent_hours @payslip.seconds %></p>
+  <p><b>Finalised:</b> <%= @payslip.finalized %></p>
+  <p><b>Paid:</b> <%= @payslip.paid %></p>
+  
+  </div>
+
+
+<div id="bottomMenu">
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, payslips_path %>
+<%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_payslip_path(@payslip) %> 
+</div>
+
+

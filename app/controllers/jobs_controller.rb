@@ -4,20 +4,36 @@ class JobsController < ApplicationController
 
   include JobsHelper
 
-  # GET /jobs
-  # GET /jobs.json
-  def index
+
+  def index #only returning jobs that arnt complete
     if @current_user.admin
       @jobs = Job.all
     elsif @current_user.boss
-      @jobs = @current_user.company.jobs
+      @jobs = Job.where(:company_id => @current_user.company.id, :completed => false)
     else
-      @jobs = @current_user.jobs
+      payslip = Payslip.find_by(user_id: @current_user.id, finalized: false)
+      @jobs = Job.where(id: payslip.jobs.ids, completed: false ) if payslip.present?
+
+      @jobs
     end
+
   end
 
-  # GET /jobs/1
-  # GET /jobs/1.json
+
+  def all #jobs that are complete
+    if @current_user.admin
+      @jobs = Job.all
+    elsif @current_user.boss
+      @jobs = Job.where(:company_id => @current_user.company.id, :completed => true)
+    else
+      payslip = Payslip.find_by(user_id: @current_user.id, finalized: false)
+      @jobs = Job.where(id: payslip.jobs.ids, completed: true ) if payslip.present?
+
+      @jobs
+    end
+
+  end
+
   def show
   
     if @current_user.admin
@@ -42,6 +58,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
+    redirect_to root_path if !@current_user.boss
     @job = Job.new
     @clients = @current_user.company.clients
   end
@@ -63,6 +80,7 @@ class JobsController < ApplicationController
       time_now = Time.zone.now
       job.update(:end => time_now, :seconds => (time_now - job.start) )
 
+      payslip_seconds_update job
     end
 
     if request.xhr?
@@ -81,20 +99,15 @@ class JobsController < ApplicationController
 
     job.update(:comments => job_params[:comments], :completed => true)
 
-    binding.pry
-
     if request.xhr?
-        redirect_to root_path
+        render :text => "completed"
     end
 
   end
 
-  # POST /jobs
-  # POST /jobs.json
+
   def create
     @job = Job.new(job_params)
-
-   
 
     respond_to do |format|
       if @job.save
@@ -110,15 +123,31 @@ class JobsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /jobs/1
-  # PATCH/PUT /jobs/1.json
+
   def update
     @job = Job.find(params[:id])
 
-
     respond_to do |format|
+
       if @job.update(job_params)
-        bind_users_job(@job) if job_params[:onsite] 
+        bind_users_job(@job) if job_params[:onsite]
+
+
+        if @job.end
+
+          if @job.seconds !=0
+              #update payslips connected to job with with delta change to seconds
+              if @job.seconds != @job.end - @job.start
+                dseconds = (@job.end - @job.start) - @job.seconds
+                job_modified_update_payslips(@job, dseconds)
+              end
+
+          end
+          
+          @job.update( :seconds => @job.end - @job.start )
+
+        end
+
 
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
@@ -129,8 +158,7 @@ class JobsController < ApplicationController
     end
   end
 
-  # DELETE /jobs/1
-  # DELETE /jobs/1.json
+
   def destroy
     @job = Job.find(params[:id])
     @job.destroy
@@ -149,7 +177,6 @@ class JobsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:address, :id, :notes, :start, :end, :seconds, :comments, :client_id, :company_id, :completed, :paid, :photo1, :photo2, :photo3, :reference, :onsite)
     end

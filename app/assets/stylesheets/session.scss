@@ -10,7 +10,7 @@
     orientation: portrait;
   }
 
-  p, input { min-width: 100%; }
+  p, input { min-width: 85%; }
 
   #login p {
     text-align: center;
@@ -48,6 +48,10 @@
     max-width: 100%;
     margin-left: 0;
   }
+
+  .bottomMenu{
+    width: 80%;
+  }
   
   #myUserSelect{
   margin-top: 70px;
@@ -75,6 +79,14 @@
   select{
     
     width:100%;
+  }
+
+  button#complete{
+    width:80%;
+  }
+
+  #mortals li{
+    width: 25%;
   }
 
 

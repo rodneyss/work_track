@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
+<div id="bottomMenu">
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, @client %>
+ 
+</div>

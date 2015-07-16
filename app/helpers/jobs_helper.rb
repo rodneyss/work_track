@@ -22,7 +22,7 @@ module JobsHelper
 
   def bind_users_job job
 
-    clear_old_users job
+    clear_old_users job if job.users
 
     onsite_users = job.onsite.scan /\w+\b/
 
@@ -50,6 +50,7 @@ module JobsHelper
      if payslip.nil?
       payslip = Payslip.create()
       worker.payslips << payslip
+      @current_user.company.payslips << payslip
      end
 
      payslip
@@ -57,9 +58,30 @@ module JobsHelper
   end
 
 
+
+  def payslip_seconds_update job
+
+    job.payslips.each do |payslip|
+      payslip.seconds += job.seconds
+      payslip.save
+    end
+
+  end
+
+
+  def job_modified_update_payslips job, dseconds
+
+    job.payslips.each do |payslip|
+      payslip.seconds += dseconds
+      payslip.save
+    end
+
+  end
+
+
   def clear_old_users job
     users = job.users.ids
-    payslip_ids = (Payslip.where(user_id: users)).ids
+    payslip_ids = (Payslip.where(user_id: users, finalized: false)).ids
 
     payslip_ids.each do |id|
 

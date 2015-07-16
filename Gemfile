@@ -24,8 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-  gem 'factory_girl_rails'
-  gem 'faker'
+ 
 
 gem 'formatted_times'
 
@@ -36,6 +35,8 @@ gem 'formatted_times'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'rspec-rails'
   gem 'simplecov', :require => false
 

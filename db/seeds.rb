@@ -1,4 +1,4 @@
-require 'faker'
+
 Company.destroy_all
 User.destroy_all
 Payslip.destroy_all
@@ -6,7 +6,7 @@ Client.destroy_all
 Job.destroy_all
 
 
-admin = User.create(name: 'admin', email: 'admin@site.com', password: "password", boss: true, admin: true)
+admin = User.create(name: 'admin', email: 'admin@site.com', password: "01Mpw4wtit", boss: true, admin: true)
 
 company1 = Company.create(name: 'Wello Plumbing', address: Faker::Address.street_address)
 client1 = Client.create(name: 'Link real estate', address: Faker::Address.street_address)
@@ -15,13 +15,14 @@ client2= Client.create(name: 'Hamilton Homes', address: Faker::Address.street_ad
 job1 = Job.create(address: Faker::Address.street_address)
 payslip1 = Payslip.create()
 
-boss1 = User.create(name: 'tom', email: 'tom@site.com', password: "password", boss: true)
+boss1 = User.create(name: 'tom', email: 'tom@site.com', password: "01Mpw4wtit", boss: true)
 worker1 = User.create(name: 'jesse', email: 'jesse@site.com', password: "password")
 worker2 = User.create(name: 'ben', email: 'ben@site.com', password: "password")
 worker3 = User.create(name: 'mathew', email: 'mathew@site.com', password: "password")
 
 company1.users << boss1 << worker1 << worker2 << worker3
 company1.clients << client1 << client2
+company1.payslips << payslip1
 
 company1.jobs << job1
 

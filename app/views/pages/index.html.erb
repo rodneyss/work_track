@@ -12,22 +12,28 @@
         <%= link_to 'Users', users_path %>
       </li>
     </ul>
-<% elsif @current_user.boss %>
+<% end %>
+
   <ul class="mainMenu">
     <li>
-      
       <%= link_to '<div class="bottomMenu">Jobs</div>'.html_safe, jobs_path %>
-
     </li>
 
-    <li>
-     
-       <%= link_to '<div class="bottomMenu">Workers</div>'.html_safe, users_path %>
-    </li>
-   
+    <% if @current_user.boss %>
+
+      <li>
+         <%= link_to '<div class="bottomMenu">Workers</div>'.html_safe, users_path %>
+      </li>
+
+      <li>
+         <%= link_to '<div class="bottomMenu">Clients</div>'.html_safe, clients_path %>
+      </li>
+
+      <li>
+         <%= link_to '<div class="bottomMenu">Wages</div>'.html_safe, payslips_path %>
+      </li>
+   <% end  %>
 
   </ul>
-
-<% end  %>
 
 </div>

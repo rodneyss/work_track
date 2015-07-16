@@ -12,9 +12,9 @@
   <% end %>
 
 
-    <div id="addWorkers"> 
-      <h3>Workers</h3>
-    </div>
+    <button id="addWorkers" class="comButton"> 
+      Workers
+    </button>
 
 
 
@@ -22,7 +22,7 @@
 
         <% @job.users.each do |user| %>
 
-         <div class="bottomMenu workForce" data-workid=<%= user.id %> ><%= user.name %></div>
+         <div class="onsiteButton workForce" data-workid=<%= user.id %> ><%= user.name %></div>
 
         <% end %>
 

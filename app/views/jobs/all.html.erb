@@ -3,9 +3,10 @@
 <% if @current_user.boss %>
   <div id="bottomMenu">
     <%= link_to '<div class="bottomMenu">New Job</div>'.html_safe, new_job_path %>
-    <%= link_to '<div class="bottomMenu">Completed Jobs</div>'.html_safe, all_path %>
+    <%= link_to '<div class="bottomMenu">Back</div>'.html_safe, jobs_path %>
   </div>
 <% end  %>
+
 
 
 <% if @jobs.present? %>

@@ -9,6 +9,9 @@
   
   </div>
 
-<%= link_to 'Company', company_path(@user.company) %>
-<%= link_to 'Edit', edit_user_path(@user) %>
+<div id="bottomMenu">
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, users_path %>
+<%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_user_path(@user) %>
+<%= link_to '<div class="bottomMenu">Destroy</div>'.html_safe, @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
 

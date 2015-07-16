@@ -7,8 +7,8 @@ module ApplicationHelper
 
     if @current_user.present?
         nav += '<li>' + link_to("Home", root_path) + '</li>'
-        nav += '<li>' + link_to("View Profile", @current_user) + '</li>'
-        nav += '<li>' + link_to("Logout #{ @current_user.name }", login_path, :method => :delete) + '</li>'
+        nav += '<li>' + link_to("Profile", @current_user) + '</li>'
+        nav += '<li>' + link_to("Logout", login_path, :method => :delete) + '</li>'
 
     end
 

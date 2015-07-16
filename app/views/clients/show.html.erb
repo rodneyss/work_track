@@ -1,4 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+  <div>
+  <h3>Info</h3>
+  <p><b>Name:</b> <%= @client.name %></p>
+  <p><b>Email:</b> <%= @client.email%></p>
+  <p><b>Address:</b> <%= @client.address %></p>
+  <p><b>Phone:</b> <%= @client.phone %></p>
+  
+  </div>
+
+
+<div id="bottomMenu">
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, clients_path %>
+<%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_client_path(@client) %> 
+<%= link_to '<div class="bottomMenu">Destroy</div>'.html_safe, @client, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>

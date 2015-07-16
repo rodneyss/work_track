@@ -2,5 +2,6 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @payslip %> |
-<%= link_to 'Back', payslips_path %>
+<div id="bottomMenu">
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, @payslip %>
+</div>

@@ -1,52 +1,55 @@
 class ClientsController < ApplicationController
   before_action :check_user
 
-  # GET /clients
-  # GET /clients.json
+
   def index
 
     if @current_user.admin
      @clients = Client.all
     else
       @clients = @current_user.company.clients
+    end
   end
 
-  # GET /clients/1
-  # GET /clients/1.json
+
   def show
-   clients = @current_user.company.clients.id
+   clients = @current_user.company.clients.ids
+
+
+   id = params[:id].to_i
 
    if @current_user.admin
-    @client = Client.find(params[:id])
-   elsif clients.index params[:id]      #checks if the client belongs to user company
-    @client = Client.find(params[:id])
+    @client = Client.find(id)
+   elsif clients.index id     #checks if the client belongs to user company
+    @client = Client.find(id)
    else
     redirect_to root_path
    end
 
   end
 
-  # GET /clients/new
+
   def new
     @client = Client.new
   end
 
-  # GET /clients/1/edit
+ 
   def edit
-   clients = @current_user.company.clients.id
+   clients = @current_user.company.clients.ids
+
+   id = params[:id].to_i
 
    if @current_user.admin
-    @client = Client.find(params[:id])
-   elsif clients.index params[:id]      #checks if the client belongs to user company
-    @client = Client.find(params[:id])
+    @client = Client.find(id)
+   elsif clients.index id      #checks if the client belongs to user company
+    @client = Client.find(id)
    else
     redirect_to root_path
    end
 
   end
 
-  # POST /clients
-  # POST /clients.json
+ 
   def create
 
     redirect_to root_path if !@current_user.boss  #only boss can create clients
@@ -66,8 +69,7 @@ class ClientsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clients/1
-  # PATCH/PUT /clients/1.json
+  
   def update
     @client = Client.find(params[:id])
     respond_to do |format|
@@ -81,8 +83,7 @@ class ClientsController < ApplicationController
     end
   end
 
-  # DELETE /clients/1
-  # DELETE /clients/1.json
+ 
   def destroy
     redirect_to root_path if !@current_user.boss #only boss can delete clients
 
@@ -104,8 +105,8 @@ class ClientsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params[:client]
+      params.require(:client).permit(:name, :address, :phone, :email)
     end
 end
+
