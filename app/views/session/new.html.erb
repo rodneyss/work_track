@@ -6,20 +6,21 @@
 
 
   <div>
-    <%= label_tag 'email', 'email', :class => 'loginPage'%>
+    <%= label_tag 'email', 'Email', :class => 'loginPage'%>
     <%= text_field_tag 'email' %>
   </div>
 
    <div>
-    <%= label_tag 'password', 'password', :class => 'loginPage'%>
+    <%= label_tag 'password', 'Password', :class => 'loginPage'%>
     <%= password_field_tag 'password'%>
   </div>
 
+  <br>
+  <br>
+  <div>
+    <%= button_tag 'Login', :id => 'loginButton' %>
+  </div>  
 
-  <p>
-    <%= submit_tag 'Login' %>
-  </p>
-  
 
 
 <% end %>

@@ -9,16 +9,18 @@
 </head>
 <body>
 
-   <nav id="mortals">
+  <%if @current_user.present? %>
+     <nav id="mortals">
         <ul>
           
           <%== intellinav  %>
 
         </ul>
     </nav>
+  <% end %>
 
   <div id="container">
-    
+
 
     <%= yield %>
 
