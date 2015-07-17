@@ -72,11 +72,11 @@ class JobsController < ApplicationController
 
   def start_stop
     job = Job.find(params[:id])
-  
+    
     if job_params[:start] == '1' && !job.start
       job.update(:start => Time.zone.now)
 
-    elsif job.
+    elsif !job.finish
       time_now = Time.zone.now
       job.update(:finish => time_now, :seconds => (time_now - job.start) )
 
