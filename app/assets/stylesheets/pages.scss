@@ -22,11 +22,15 @@ label.loginPage{
 #loginButton{
   width:15%;
   height: 50px;
-   color: #2C3E50;
-   text-shadow:0px 1px 0px #e1e2ed;
+  color: #2C3E50;
+  margin-bottom: 40px;
+  text-shadow:0px 1px 0px #e1e2ed;
 
-     font-family:Arial;
+  font-family:Arial;
   font-size:17px;
+
+
+  
 }
 
 
@@ -154,11 +158,11 @@ td#hoursDone{
 }
 
 #job_start{
-  width:25%
+  width:33%
 }
 
 #job_end{
-  width:25%;
+  width:33%;
 }
 
 
@@ -191,6 +195,10 @@ select{
   width: 33%;
 }
 
+div#clientSelect{
+  margin: 10px auto;
+}
+
 
 .bottomMenu{
   margin-top: 5px;
@@ -211,8 +219,8 @@ select{
 }
 
 #onSite{
-  max-width: 25%;
-  margin-left: 37.5%;
+  max-width: 33%;
+  margin-left: 33%;
 }
 
 #menu_select li{
@@ -241,27 +249,26 @@ select{
 #myUserSelect .workForce{
   margin-top: 5px;
   margin-bottom: 5px;
-  width: 30%;
-  height: 50px;
-  line-height: 35px;
+  max-width: 30%;
+  height: 30px;
+  line-height: 10px;
   overflow: hidden;
   margin: 2px;
 }
 
-.workForce{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 30%;
-  height: 50px;
-  line-height: 35px;
+#onSite .workForce{
+  max-width: 31%;
+  height: 35px;
   overflow: hidden;
+  line-height: 10px;
   margin: 2px;
 }
+
 
 #myUserSelect{
   margin-top: 70px;
-  width: 25%;
-  margin-left: 37.5%;
+  width: 33%;
+  margin-left: 33%;
 }
 
 #doneSelect{

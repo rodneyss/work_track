@@ -28,7 +28,7 @@
 
     </div>
 
-    <div class="field">
+    <div id="clientSelect", class="field">
     <%= f.collection_select :client_id, @clients, :id, :name, include_blank: true %>
     </div>
   
@@ -64,12 +64,16 @@
       </div>
 
       <%= f.hidden_field :onsite, :value => @job.onsite, id: "chosenWorkers" %>
-
+<!-- 
   <div class="actions">
     <%= f.submit %>
+  </div> -->
+
+  <div>
+    <%= f.button 'Update', :id => 'loginButton', :class => 'comButton' %>
+  </div> 
 
 
-  </div>
 <% end %>
 
 

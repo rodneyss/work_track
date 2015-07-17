@@ -65,8 +65,10 @@ class PayslipsController < ApplicationController
 
      @payslip = Payslip.find(params[:id])
     if @current_user.boss && @payslip.company_id == @current_user.company_id || @current_user.admin
+
         respond_to do |format|
           if @payslip.update(payslip_params)
+            @payslip.update(seconds: 0) if @payslip.seconds.nil?
             format.html { redirect_to @payslip, notice: 'Payslip was successfully updated.' }
             format.json { render :show, status: :ok, location: @payslip }
           else

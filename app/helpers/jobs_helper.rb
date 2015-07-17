@@ -2,8 +2,11 @@ module JobsHelper
 
   def time_spent_hours seconds
     time_words = ""
+    seconds = 0 if seconds.nil?
 
-    return "0" if seconds < 1.minute
+    
+      return "0" if seconds < 1.minute
+  
 
     if seconds >= 1.hour
       hour_done = (seconds / 1.hour).floor

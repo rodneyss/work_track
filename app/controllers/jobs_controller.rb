@@ -133,7 +133,7 @@ class JobsController < ApplicationController
         bind_users_job(@job) if job_params[:onsite]
 
 
-        if @job.end
+        if @job.finish
 
           if @job.seconds !=0
               #update payslips connected to job with with delta change to seconds
