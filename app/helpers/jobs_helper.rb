@@ -1,5 +1,8 @@
 module JobsHelper
 
+
+  Clientd = Struct.new(:id, :name, :first, :last)
+
   def time_spent_hours seconds
     time_words = ""
     seconds = 0 if seconds.nil?

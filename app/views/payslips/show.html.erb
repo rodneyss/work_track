@@ -14,8 +14,41 @@
 
 
 <div id="bottomMenu">
-<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, payslips_path %>
-<%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_payslip_path(@payslip) %> 
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, 'javascript:history.go(-1);' %>
+<% if @current_user.boss %>
+  <%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_payslip_path(@payslip) %> 
+<% end %>
 </div>
 
+<% if @payslip.jobs.present? %>
+  <br>
+  <p>Jobs Associated with time sheet</p>
+  <table id="jobListing">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Notes</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @payslip.jobs.each do |job| %>
+        <tr id="jobjob">
+          <td><%= job.address %></td>
+          <td><%= job.notes %></td>
+
+          <td><%= link_to 'Show', job %></td> 
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+
+<p>No Jobs available</p>
+
+<% end %>
 

@@ -15,18 +15,15 @@
      </p>
 
 
-
-
-
     <p><b>Workers Onsite</b>
 
     <div id="onSite" class="workersWork">
 
         <% @job.users.each do |user| %>
 
-         <div class="workForce onsiteButton" data-workid=<%= user.id %> ><%= user.name %></div>
+         <div class="workForce onsiteButton" data-workid=<%= user.id %> ><%= user.name.match /\S*\w*\s*\w*/ %></div>
 
-    <% end %>
+        <% end %>
 
     </div>
     <p><b>Notes</b></p> 
@@ -59,9 +56,24 @@
 
       <%if !@job.completed %>
 
-      <button id="complete" class="comButton">Job Done</button>
-      
+        <button id="complete" class="comButton">Job Done</button>
+
+      <%elsif !@job.amount %>
+
+        <br>
+        <div id="jAmount">
+          <%= label_tag(:job_amount, "Amount in dollars") %> <br>
+          <%= number_field(:job, :amount) %>
+          <br>
+          <button id="amount" class="comButton">Invoice Amount</button>
+        </div>
+      <% elsif @current_user.boss %>
+
+        <p>Invoice amount: <%= number_to_currency(@job.amount) %> </p> 
+
       <% end %>
+
+
   
   </div>
 
@@ -70,11 +82,11 @@
 <br>
 
 <div id="bottomMenu">
-<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, jobs_path %>
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, 'javascript:history.go(-1);' %>
+
 
 <% if @current_user.boss %>
 <%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_job_path(@job) %> 
-<%= link_to '<div class="bottomMenu">Destroy</div>'.html_safe, @job, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end  %>
+<% end %>
 
 </div>

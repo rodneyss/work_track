@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 *{
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
   box-sizing: border-box; 
 }
 
@@ -9,10 +11,8 @@
 
 #container{
   margin-top: 80px;
- 
   width: 98%;
   margin-left: 1%;
-  
 }
 
 label.loginPage{
@@ -25,27 +25,16 @@ label.loginPage{
   color: #2C3E50;
   margin-bottom: 40px;
   text-shadow:0px 1px 0px #e1e2ed;
-
   font-family:Arial;
   font-size:17px;
-
-
-  
 }
 
-
-
-
-
 html, body{
-  
   text-align: center;
   margin: 0;
   background: #5AAAE4;
-  
   font-family: verdana, arial, helvetica, sans-serif;
-    color: #333;
-  
+  color: #333;
   font-size: 13px;
   line-height: 18px;
 }
@@ -66,7 +55,6 @@ nav{
     display: inline-block;
     cursor: pointer;
     width: 20%;
-
   }
 }
 
@@ -76,7 +64,6 @@ input{
   margin-bottom: 10px;
   height: 50px;
   text-align: center;
-  
 }
 
 #password, #email{
@@ -103,10 +90,11 @@ input:focus{
 }
 
 #mortals{
-    position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #2C3E50;
+  z-index: 9999999;
 }
 
 ul{
@@ -134,8 +122,9 @@ table#jobListing{
   margin-top: 40px;
 }
 
-td{
-  border: 1px solid rgb(67, 78, 86);;
+
+#jobListing td{
+  border: 1px solid black;
   padding: 20px;
 }
 
@@ -194,6 +183,10 @@ select{
   font-size: 1.5em;
   width: 33%;
 }
+
+.dataTables_length select{
+    width: 37%;
+  }
 
 div#clientSelect{
   margin: 10px auto;

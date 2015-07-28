@@ -2,7 +2,12 @@
 
 
 <% if @current_user.boss %>
+<div id="bottomMenu">
+  <%= link_to '<div class="bottomMenu">Back</div>'.html_safe, root_path %>
+
+</div>
   <button id="finalize" class="comButton">Finalize all</button>
+  <button id="finalize" class="comButton">Mark all paid</button>
 
 <% end %>
 

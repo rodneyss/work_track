@@ -13,7 +13,7 @@ class PayslipsController < ApplicationController
       @payslips = Payslip.where(:company_id => @current_user.company_id, :paid => false)
     else
       payslip = Payslip.find_by(user_id: @current_user.id, finalized: false)
-      @payslips = Payslip.where(id: payslip.user_id, completed: false ) if payslip.present?
+      @payslips = Payslip.where(id: payslip.user_id, finalized: false ) if payslip.present?
       @payslips
     end
   end
@@ -22,9 +22,7 @@ class PayslipsController < ApplicationController
   def show
      @payslip = Payslip.find(params[:id])
 
-    if @current_user.admin
-
-    elsif @current_user.boss 
+    if @current_user.boss && !@current_user.admin
       if @current_user.company_id != @payslip.company_id
         @payslip = nil
       end

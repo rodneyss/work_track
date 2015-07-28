@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get '/all' => 'jobs#all'
 
+  get '/clientjob' => 'jobs#client_job'
+
   get '/finalize' => 'payslips#finalize' 
 
   get '/users/new_worker_company/:id' => 'users#new_worker_company'

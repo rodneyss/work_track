@@ -20,19 +20,45 @@ class JobsController < ApplicationController
   end
 
 
-  def all #jobs that are complete
+  def all #return last 10 jobs that are complete
     if @current_user.admin
       @jobs = Job.all
     elsif @current_user.boss
-      @jobs = Job.where(:company_id => @current_user.company.id, :completed => true)
+      @jobs = Job.where(company_id: @current_user.company.id, completed: true).order(id: :asc).take(10)
     else
       payslip = Payslip.find_by(user_id: @current_user.id, finalized: false)
       @jobs = Job.where(id: payslip.jobs.ids, completed: true ) if payslip.present?
-
       @jobs
     end
 
   end
+
+
+  def client_job
+
+    client_list = []
+
+    first_job = Job.where(client_id: nil).first
+    
+    if first_job.present?
+      last_job = Job.where(client_id: nil).last
+      d = Clientd.new("na", "no client", first_job.year, last_job.year )
+      client_list << d
+    end
+
+    @current_user.company.clients.each do |client|
+      if client.jobs.present?
+        d = Clientd.new(client.id, client.name, client.jobs.first.created_at.year, client.jobs.last.created_at.year)
+        client_list << d
+      end
+    end
+
+    if request.xhr?
+      render :json => client_list
+    end
+
+  end
+
 
   def show
   
@@ -146,11 +172,10 @@ class JobsController < ApplicationController
           
           @job.update( :seconds => @job.finish - @job.start )
 
+          
+          format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+          format.json { render :show, status: :ok, location: @job }
         end
-
-
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
-        format.json { render :show, status: :ok, location: @job }
       else
         format.html { render :edit }
         format.json { render json: @job.errors, status: :unprocessable_entity }
@@ -178,6 +203,6 @@ class JobsController < ApplicationController
     end
 
     def job_params
-      params.require(:job).permit(:address, :id, :notes, :start, :finish, :seconds, :comments, :client_id, :company_id, :completed, :paid, :photo1, :photo2, :photo3, :reference, :onsite)
+      params.require(:job).permit(:address, :id, :notes, :start, :finish, :seconds, :comments, :client_id, :company_id, :completed, :paid, :photo1, :photo2, :photo3, :reference, :onsite, :amount)
     end
 end

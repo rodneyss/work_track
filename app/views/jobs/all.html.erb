@@ -2,44 +2,53 @@
 
 <% if @current_user.boss %>
   <div id="bottomMenu">
-    <%= link_to '<div class="bottomMenu">New Job</div>'.html_safe, new_job_path %>
-    <%= link_to '<div class="bottomMenu">Back</div>'.html_safe, jobs_path %>
+    <%= link_to '<button class="bottomMenu">Back</button>'.html_safe, jobs_path %>
+    <button id="allClients" class="bottomMenu">All</button>
   </div>
 <% end  %>
 
+<div id="jobContainer">
+  <p>Completed unpaid jobs</p>
 
+  <table id="jobListing" class="comJobs">
+  <thead>
+    <tr>
+      <th>Finished</th>
+      <th>Address</th>
+      <th>Amount</th>
+      <th>Paid</th>
+      <th>Link</th>
+    </tr>
+  </thead>
 
-<% if @jobs.present? %>
-  <table id="jobListing">
-    <thead>
+  <tbody>
+    <% @jobs.each do |job| %>
       <tr>
-        <th>Address</th>
-        <th>Notes</th>
-        <th colspan="3"></th>
+        <td><%= job.finish.strftime('%A, %d %b %Y')%></td>
+        <td><%= job.address %></td>
+        <td><%= number_to_currency(job.amount) %></td>
+        <td data-jobid=<%=job.id%>><%= job.paid %></td>
+
+        <td><%= link_to 'Show', job %></td>
+        
       </tr>
-    </thead>
-
-    <tbody>
-      <% @jobs.each do |job| %>
-        <tr id="jobjob">
-          <td><%= job.address %></td>
-          <td><%= job.notes %></td>
-
-          <td><%= link_to 'Show', job %></td> 
-          
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% else %>
+    <% end %>
+  </tbody>
+</table>
 
 
-<p>No Jobs available</p>
-
-<% end %>
 
 
-<br>
+
+
+
+
+
+
+</div>
+
+
+
+
 
 

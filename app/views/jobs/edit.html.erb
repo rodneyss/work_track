@@ -7,10 +7,11 @@
 <div id="bottomMenu">
 
 
-<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, @job %>
+<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, 'javascript:history.go(-1);' %>
  
 
-<%= link_to '<div class="bottomMenu">Jobs</div>'.html_safe, jobs_path %>
+<%= link_to '<div class="bottomMenu">Destroy</div>'.html_safe, @job, method: :delete, data: { confirm: 'Are you sure?' } %>
+
 
 
 

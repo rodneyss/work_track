@@ -10,8 +10,43 @@
   </div>
 
 <div id="bottomMenu">
-<%= link_to '<div class="bottomMenu">Back</div>'.html_safe, users_path %>
-<%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_user_path(@user) %>
-<%= link_to '<div class="bottomMenu">Destroy</div>'.html_safe, @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to '<div class="bottomMenu">Back</div>'.html_safe, users_path %>
+  <%= link_to '<div class="bottomMenu">Edit</div>'.html_safe, edit_user_path(@user) %>
+
 </div>
+
+<% if @user.payslips %>
+  <br>
+  <p>Time Sheets</p>
+
+
+  <table id="jobListing">
+  <thead>
+    <tr>
+      <th>Start</th>
+      <th>Hours</th>
+      <th>Finalized</th>
+      <th>Paid</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.payslips.each do |payslip| %>
+      <tr>
+        <td><%= payslip.start.strftime('%b %d, %Y') %></td>
+        <td><%= time_spent_hours payslip.seconds %></td>
+        <td><%= payslip.finalized %></td>
+        <td><%= payslip.paid %></td>
+
+        <td><%= link_to 'Show', payslip %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<% end %>
 

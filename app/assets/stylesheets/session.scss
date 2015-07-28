@@ -10,7 +10,19 @@
     orientation: portrait;
   }
 
-  p, input { min-width: 100%; }
+  p{ min-width: 100%; }
+
+  input{
+    min-width: 90%;
+  }
+
+  .dataTables_filter input{
+    min-width: 60%
+  }
+
+  .dataTables_length select{
+    max-width: 15%
+  }
 
   #login p {
     text-align: center;
@@ -52,7 +64,7 @@
   }
 
   .bottomMenu{
-    width: 80%;
+    width: 32%;
   }
   
   #myUserSelect{
@@ -77,8 +89,7 @@
   margin-left: 0;
   }
 
-  select{
-    
+  select{ 
     width:100%;
   }
 
@@ -93,6 +104,14 @@
   #container{
     width: 92%;
     margin-left: 4%;
+  }
+
+  .mainMenu .bottomMenu{
+    width: 90%;
+  }
+
+  #jobListing td{
+    padding: 4px;
   }
 
 

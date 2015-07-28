@@ -140,14 +140,7 @@
 
 
 
-
-
-
-
-
-
-table, th, td {
-    border: 1px solid rgb(10, 30, 30);
+table, th, td { 
     border-collapse: collapse;
 }
 td{
@@ -161,7 +154,7 @@ table tr:nth-child(even) {
 table tr:nth-child(odd) {
    background-color:#fff;
 }
-table th  {
+th{
     background-color: rgb(67, 78, 86);
     color: white;
 }

@@ -22,7 +22,7 @@
 
         <% @job.users.each do |user| %>
 
-         <div class="onsiteButton workForce" data-workid=<%= user.id %> ><%= user.name %></div>
+         <div class="onsiteButton workForce" data-workid=<%= user.id %> ><%= user.name.match /\S*\w*\s*\w*/ %></div>
 
         <% end %>
 
@@ -41,7 +41,7 @@
       <%= f.text_area :address, :placeholder => "address" %><br>
     </div>
     <div class="field">
-      <%= f.text_area :notes, :placeholder => "notes" %><br>
+      <%= f.text_area :notes, :placeholder => "add contact name/numbers and any details about job" %><br>
     </div>
 
     <% if @job.address %>
@@ -52,6 +52,12 @@
         <%= f.datetime_local_field :finish %><br>
       </div>
     <% end %>
+
+    <div class="field">
+      <%= f.number_field :amount, :placeholder => "amount dollars" %><br>
+    </div>
+
+
 
       <div class="checkBox">
       <%= f.label "Completed" %> <br/>
@@ -69,8 +75,8 @@
     <%= f.submit %>
   </div> -->
 
-  <div>
-    <%= f.button 'Update', :id => 'loginButton', :class => 'comButton' %>
+  <div class="actions">
+    <%= f.button :id => 'loginButton', :class => 'comButton' %>
   </div> 
 
 
