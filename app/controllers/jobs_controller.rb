@@ -84,7 +84,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    redirect_to root_path if !@current_user.boss
+    redirect_to root_path unless @current_user.boss
     @job = Job.new
     @clients = @current_user.company.clients
   end

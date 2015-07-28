@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20150727130638) do
 
   create_table "payslips", force: :cascade do |t|
     t.boolean  "paid",       default: false
-    t.datetime "start",      default: '2015-07-27 13:22:06'
+    t.datetime "start",      default: '2015-07-28 10:32:30'
     t.datetime "finish"
     t.boolean  "finalized",  default: false
     t.integer  "user_id"
