@@ -24,7 +24,6 @@ $(document).ready(function() {
                 console.log(Date(data));
                 var dateRead = Date(data.timeTaken).replace(/GMT.*/, "")
                 $('#startBox').html(dateRead);
-
             });
         }
 
@@ -56,7 +55,6 @@ $(document).ready(function() {
     };
 
     var invoiceAmount = function() {
-        console.log('fired');
         if ( $('#job_amount').val() != "" ) {
             var jobData = {
                 job: {
@@ -267,8 +265,6 @@ $(document).ready(function() {
       console.log(this.dataset.jobid);
       console.log(this.innerHTML);
     }
-
-
 
     if ($('#addWorkers')) {
         upDateWorkers()
