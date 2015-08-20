@@ -248,6 +248,7 @@ $(document).ready(function() {
         }
     };
 
+    // display years present > past
     var yearsShow = function() {
         var $element = $('#jobContainer');
         console.log(job.clients);
@@ -257,7 +258,8 @@ $(document).ready(function() {
 
         $element.html('');
         for (var i = last; i >= first; i--) {
-            $element.append('<div class="bottomMenu" data-client=' + job.clients[n].id + '>' + last + '</div>');
+            h= "/archieve/" + job.clients[n].id + "/" + last;
+            $element.append('<a href='+ h + '><div class="bottomMenu" data-client=' + job.clients[n].id + '>' + last + '</div></a>');
         }
     }
 
@@ -265,8 +267,6 @@ $(document).ready(function() {
       console.log(this.dataset.jobid);
       console.log(this.innerHTML);
     }
-
-
 
 
 

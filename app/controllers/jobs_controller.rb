@@ -33,6 +33,20 @@ class JobsController < ApplicationController
 
   end
 
+  def archieve
+    if @current_user.admin
+      @jobs = Job.all
+    elsif @current_user.boss
+      @jobs = Job.where("extract(year from start) = #{params[:year]} and company_id = #{@current_user.company.id} and completed = 't' and client_id = #{params[:id]}")
+    else
+      payslip = Payslip.find_by(user_id: @current_user.id, finalized: false)
+      @jobs = Job.where(id: payslip.jobs.ids, completed: true ) if payslip.present?
+
+      @jobs
+    end
+
+  end
+
 
   def client_job
 
@@ -158,21 +172,17 @@ class JobsController < ApplicationController
       if @job.update(job_params)
         bind_users_job(@job) if job_params[:onsite]
 
-
         if @job.finish
-
           if @job.seconds !=0
               #update payslips connected to job with with delta change to seconds
               if @job.seconds != @job.finish - @job.start
                 dseconds = (@job.finish - @job.start) - @job.seconds
                 job_modified_update_payslips(@job, dseconds)
               end
-
           end
           
           @job.update( :seconds => @job.finish - @job.start )
 
-          
           format.html { redirect_to @job, notice: 'Job was successfully updated.' }
           format.json { render :show, status: :ok, location: @job }
         end

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<% if @current_user.boss %>
+  <div id="bottomMenu">
+    <%= link_to '<button class="bottomMenu">Back</button>'.html_safe, jobs_path %>
+    <button id="allClients" class="bottomMenu">All</button>
+  </div>
+<% end  %>
+
+<div id="jobContainer">
+
+  <table id="jobListing" class="comJobs">
+  <thead>
+    <tr>
+      <th>Finished</th>
+      <th>Address</th>
+      <th>Amount</th>
+      <th>Paid</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td><%= job.finish.strftime('%A, %d %b %Y')%></td>
+        <td><%= job.address %></td>
+        <td><%= number_to_currency(job.amount) %></td>
+        <td data-jobid=<%=job.id%>><%= job.paid %></td>
+
+        <td><%= link_to 'Show', job %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+
+
+

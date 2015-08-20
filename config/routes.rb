@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get '/all' => 'jobs#all'
 
+  get '/archieve/:id/:year' => 'jobs#archieve'
+
   get '/clientjob' => 'jobs#client_job'
 
   get '/finalize' => 'payslips#finalize' 

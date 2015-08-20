@@ -58,8 +58,7 @@
 
         <button id="complete" class="comButton">Job Done</button>
 
-      <%elsif !@job.amount %>
-
+      <%elsif !@job.amount && @current_user.boss %>
         <br>
         <div id="jAmount">
           <%= label_tag(:job_amount, "Amount in dollars") %> <br>

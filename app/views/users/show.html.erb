@@ -15,19 +15,19 @@
 
 </div>
 
-<% if @user.payslips %>
+<% if @user.payslips.present? %>
   <br>
   <p>Time Sheets</p>
 
 
-  <table id="jobListing">
+  <table id="jobListing22">
   <thead>
     <tr>
       <th>Start</th>
       <th>Hours</th>
       <th>Finalized</th>
       <th>Paid</th>
-      <th colspan="4"></th>
+      <th>Link</th>
     </tr>
   </thead>
 
